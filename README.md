@@ -8,6 +8,7 @@
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.XXXXX">arXiv</a>] 
 [<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download data</a>]
+[<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
 
@@ -19,7 +20,7 @@ In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-
 Figure 1: Different from conventional VL benchmarks only require one or two capabilities, \benchname{} focuses on the integration of different core VL capabilities, including recognition, OCR, knowledge, language generation, spatial awareness, and math.
 
 ## Evalute your model on MM-Vet
-**Step 0**: Make sure you can access GPT-4/GPT-3.5 API
+**Step 0**: Get access GPT-4/GPT-3.5 API. If you have not access, may try MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) (may wait for long time depending on number of users).
 
 **Step 1**:  Download MM-Vet data [here](mm-vet.zip) and unzip `unzip mm-vet.zip`.
 
