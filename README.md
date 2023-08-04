@@ -3,17 +3,17 @@
 </p>
 
 
-# [MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.XXXXX)
+# [MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://github.com/yuweihao/misc/blob/master/MM-Vet/MM-Vet.pdf)
 
 <p align="center">
-[<a href="https://arxiv.org/abs/2308.XXXXX">arXiv</a>] 
+[<a href="https://github.com/yuweihao/misc/blob/master/MM-Vet/MM-Vet.pdf">Paper</a>] 
 [<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download data</a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
 
 
-In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.XXXXX)".
+In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://github.com/yuweihao/misc/blob/master/MM-Vet/MM-Vet.pdf)".
 
 
 ![MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258206593-c61d21c8-cd9b-440c-9592-958d530bf122.png)
