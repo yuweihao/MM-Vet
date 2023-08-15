@@ -33,6 +33,10 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 ![Model results on MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258213214-f6256714-d0cf-4529-a5ca-12f10969bcdb.png)
 
 
+## About running Bard
+Please refer to these two files: [inference_bard.sh](misc/inference_bard.sh) and [inference_bard.py](misc/inference_bard.py).
+
+
 ## More examples on MM-Vet
 ![MM-Vet example 1](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258215482-61d2e5d8-51c9-45ed-b35b-8e6c64bb26d8.jpg)
 
@@ -120,17 +124,11 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 
 ---
 
-![MM-Vet example 9](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258221413-a7739ff7-b1cc-47ab-96de-2451b91168bc.jpg)
+![MM-Vet example 9](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/260642720-34a361ff-2350-494f-a557-4228700097c4.jpg)
 
 **Q**: Can you explain this meme?
 
-**GT**: This meme is a commentary on the current situation of online learning due to the COVID-19 pandemic. It shows how different parties are affected by it.
-
-The first two images show the Zoom company and the teachers throwing money in the air, which implies that they are profiting from the situation. Zoom, in particular, has seen a surge in usage and revenue due to the pandemic.
-
-The third image shows the WiFi company also throwing money in the air, which implies that they are also profiting from the situation as more people are using the internet for online learning.
-
-The last image shows a student with a sad clown face, which implies that students are not benefiting from the situation and are struggling with online learning. The "Put on a happy face" sign in the background further emphasizes the idea that students are putting on a brave face despite their struggles.
+**GT**: This meme is a humorous take on procrastination and the tendency to delay tasks until a specific time. The person in the meme plans to do something at 8 o'clock, but when they miss that deadline by a few minutes, they decide to wait until 9 o'clock instead. The image of Kermit the Frog lying in bed represents the person's laziness and lack of motivation to complete the task.
 
 **Required capabilities**: Recognition, OCR, knowledge, language generation
 
@@ -189,7 +187,7 @@ After 2004, the rate of immigration remained high, but the number of people emig
 
 ![MM-Vet example 14](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258223774-a05ddf4f-0d8e-4015-9c61-fd4bf09968f9.png)
 
-**Q**: Does the person bigger than the car?
+**Q**: Is the person bigger than the car?
 
 **GT**: no
 

@@ -1,0 +1,1 @@
+while true; do python inference.py; sleep 60; done
