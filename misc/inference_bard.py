@@ -6,7 +6,7 @@ pip install bardapi
 
 Run this script by
 ```bash
-while true; do python inference.py; sleep 60; done
+while true; do python inference_bard.py; sleep 60; done
 ```
 Currently we have to use loop in bash instead of python because the Bard-API seems have a bug.
 
