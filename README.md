@@ -30,7 +30,7 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 
 
 ## Some model results on MM-Vet
-![Model results on MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258213214-f6256714-d0cf-4529-a5ca-12f10969bcdb.png)
+![Model results on MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/264564028-65ffdb6a-03ea-4fa1-9970-210d74519864.png)
 
 
 ## About running Bard
