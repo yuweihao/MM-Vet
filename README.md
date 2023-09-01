@@ -7,7 +7,7 @@
 
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.02490">Paper</a>] 
-[<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download data</a>]
+[<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download dataset</a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
@@ -22,7 +22,7 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 ## Evalute your model on MM-Vet
 **Step 0**: Get access GPT-4/GPT-3.5 API. If you have not access, you can try MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) (but it may wait for long time depending on number of users).
 
-**Step 1**:  Download MM-Vet data [here](mm-vet.zip) and unzip `unzip mm-vet.zip`.
+**Step 1**:  Download MM-Vet data [here](https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip) and unzip `unzip mm-vet.zip`.
 
 **Step 2**: Infer your model on MM-Vet and save your model outputs in json like [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json), or just use [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json) as example to evalute.
 
