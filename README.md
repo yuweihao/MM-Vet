@@ -8,10 +8,12 @@
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.02490">Paper</a>] 
 [<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download dataset</a>]
+[<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet">Leaderbaord</a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
 
+:fire: :fire: We released [MM-Vet leaderbaord](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet) on paperswithcode.com where you can add your model results conveniently. Note that date here means model date instead of paper date because some improved model versions are released after the paper.
 
 In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490)".
 
