@@ -38,8 +38,6 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 
 ![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925959-269ff3fa-1f03-43b8-a497-60ee9e236eb3.png)
 
-![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925959-269ff3fa-1f03-43b8-a497-60ee9e236eb3.png)
-
 ![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277926586-0318ad3b-20b7-4995-b2bd-659e76b928fd.png)
 
 
