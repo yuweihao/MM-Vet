@@ -12,8 +12,10 @@
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
+2023/10/24 :fire: :fire: We evaluate GPT-4V on MM-Vet and observe that it achieves 67.7% score, outperforming other methods with large margin (20%). However, it still has a large gap to the full mark (100%), indicating the need for efforts to further improve the integrated capabilities of LMMs. See [leaderboard](ttps://paperswithcode.com/sota/visual-question-answering-on-mm-vet), [updated paper](https://arxiv.org/abs/2308.02490) and [GPT-4V prediction examples](#gpt-4v-prediction-examples).
 
-:fire: :fire: We released [MM-Vet leaderbaord](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet) on paperswithcode.com where you can add your model results conveniently. Note that date here means model date instead of paper date because some improved model versions are released after the paper.
+
+2023/10/07 :fire: :fire: We released [MM-Vet leaderbaord](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet) on paperswithcode.com where you can add your model results conveniently. Note that date here means model date instead of paper date because some improved model versions are released after the paper.
 
 In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490)".
 
@@ -31,15 +33,22 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 **Step 3**: `git clone https://github.com/yuweihao/MM-Vet.git && cd MM-Vet`, run LLM-based evaluator in [mm-vet_evaluator.ipynb](mm-vet_evaluator.ipynb)
 
 
-## Some model results on MM-Vet
-![Model results on MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/264564028-65ffdb6a-03ea-4fa1-9970-210d74519864.png)
+## GPT-4V Prediction Examples
+![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925013-daf61a18-5472-4064-88a1-d1c741bed018.png)
+
+![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925959-269ff3fa-1f03-43b8-a497-60ee9e236eb3.png)
+
+![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925959-269ff3fa-1f03-43b8-a497-60ee9e236eb3.png)
+
+![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277926586-0318ad3b-20b7-4995-b2bd-659e76b928fd.png)
+
 
 
 ## About running Bard
 Please refer to these two files: [inference_bard.sh](misc/inference_bard.sh) and [inference_bard.py](misc/inference_bard.py).
 
 
-## More examples on MM-Vet
+## More samples on MM-Vet
 ![MM-Vet example 1](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258215482-61d2e5d8-51c9-45ed-b35b-8e6c64bb26d8.jpg)
 
 **Q**: What occasions would someone use this meme?
