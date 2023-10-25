@@ -12,7 +12,7 @@
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
-2023/10/24 :fire: :fire: We evaluate GPT-4V on MM-Vet and observe that it achieves 67.7% score, outperforming other methods with large margin (20%). However, it still has a large gap to the full mark (100%), indicating the need for efforts to further improve the integrated capabilities of LMMs. See [leaderboard](ttps://paperswithcode.com/sota/visual-question-answering-on-mm-vet), [updated paper](https://arxiv.org/abs/2308.02490) and [GPT-4V prediction examples](#gpt-4v-prediction-examples).
+2023/10/24 :fire: :fire: We evaluate GPT-4V on MM-Vet and observe that it achieves 67.7% score, outperforming other methods with large margin (20%). However, it still has a large gap to the full mark (100%), indicating the need for efforts to further improve the integrated capabilities of LMMs. See [leaderboard](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet), [updated paper](https://arxiv.org/abs/2308.02490) and [GPT-4V prediction examples](#gpt-4v-prediction-examples).
 
 
 2023/10/07 :fire: :fire: We released [MM-Vet leaderbaord](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet) on paperswithcode.com where you can add your model results conveniently. Note that date here means model date instead of paper date because some improved model versions are released after the paper.
