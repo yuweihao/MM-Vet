@@ -12,6 +12,9 @@
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
 
+2023/12/23: :fire: :fire: We release inferences scripts for GPT-4V and Gemini. Gemini Pro Vision achieves 64.3% score, near 67.7% of GPT-4V.
+
+
 2023/10/24 :fire: :fire: We evaluate GPT-4V on MM-Vet and observe that it achieves 67.7% score, outperforming other methods with large margin (20%). However, it still has a large gap to the full mark (100%), indicating the need for efforts to further improve the integrated capabilities of LMMs. See [leaderboard](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet), [updated paper](https://arxiv.org/abs/2308.02490) and [GPT-4V prediction examples](#gpt-4v-prediction-examples).
 
 
