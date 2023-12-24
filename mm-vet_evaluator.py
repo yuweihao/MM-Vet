@@ -279,7 +279,6 @@ def runs(
                                     flag = False
                         grade_sample_run_complete = True
                     except RateLimitError as e:
-                        # raise e
                         # gpt4 may have token rate limit
                         print("sleep 30s")
                         time.sleep(30)
@@ -356,7 +355,11 @@ def export_result(args, df, df2, grade_results, data, cap_set_counter, cap_set_n
 
 if __name__ == "__main__":
     args = arg_parser()
-    openai.api_key = os.environ["OPENAI_API_KEY"] if "OPENAI_API_KEY" in os.environ else args.openai_api_key
+    openai.api_key = (
+        os.environ["OPENAI_API_KEY"]
+        if "OPENAI_API_KEY" in os.environ
+        else args.openai_api_key
+    )
 
     metadata = load_metadata(args)
     (
