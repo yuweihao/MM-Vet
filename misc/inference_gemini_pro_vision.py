@@ -1,24 +1,35 @@
-import json
+"""
+Please refer to https://ai.google.dev/tutorials/python_quickstart to get the API key
+
+Install with `pip install -q -U google-generativeai`,
+Then `python inference_gemini_pro_vision.py --mmvet_path /path/to/mm-vet --result_path /folder/to/save/results --google_api_key YOUR_API_KEY`
+"""
+
 import os
 import time
-import vertexai
-from vertexai.preview.generative_models import GenerativeModel, Part, Image
+from pathlib import Path
+import json
+import google.generativeai as genai
+import argparse
 
 class EvalGemini:
-    def __init__(self, project_id, location, model="gemini-pro-vision"):
-        # Initialize Vertex AI
-        vertexai.init(project=project_id, location=location)
-        self.multimodal_model = GenerativeModel("gemini-pro-vision")
+    def __init__(self, model="gemini-pro-vision"):
+        self.model = genai.GenerativeModel(model)
 
     def generate_text(self, image_path, prompt) -> str:
         # Query the model
         text = ""
         while len(text) < 1:
             try:
-                response = self.multimodal_model.generate_content(
+                image_path = Path(image_path)
+                image = {
+                    'mime_type': f'image/{image_path.suffix[1:].replace("jpg", "jpeg")}',
+                    'data': image_path.read_bytes()
+                }
+                response = self.model.generate_content(
                     [
                         # Add an example image
-                        Part.from_image(Image.load_from_file(image_path)),
+                        image,
                         # Add an example query
                         prompt,
                     ]
@@ -34,14 +45,41 @@ class EvalGemini:
         return text
 
 
+def arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--mmvet_path",
+        type=str,
+        default="/path/to/mm-vet",
+        help="Download mm-vet.zip and `unzip mm-vet.zip` and change the path here",
+    )
+    parser.add_argument(
+        "--result_path",
+        type=str,
+        default="../results",
+    )
+    parser.add_argument(
+        "--google_api_key", type=str, default=None,
+        help="refer to https://ai.google.dev/tutorials/python_quickstart"
+    )
+    parser.add_argument(
+        "--gemini_model",
+        type=str,
+        default="gemini-pro-vision",
+        help="Gemini model name",
+    )
+    args = parser.parse_args()
+    return args
+
+
 if __name__ == "__main__":
-    project_id = "GCP_PROJECT_ID"
-    location = 'GCP_LOCATION'
-    model_name = "gemini-pro-vision"
-    # change the path to your own path
-    results_path = f'../results/{model_name}.json' # path to save the results
-    image_folder = "/Users/yuweihao/od/code/mm-vet/images" 
-    meta_data = "/Users/yuweihao/od/code/mm-vet/mm-vet.json"
+    args = arg_parser()
+    model_name = args.gemini_model
+    if os.path.exists(args.result_path) is False:
+        os.makedirs(args.result_path)
+    results_path = os.path.join(args.result_path, f"{model_name}.json")
+    image_folder = os.path.join(args.mmvet_path, "images")
+    meta_data = os.path.join(args.mmvet_path, "mm-vet.json")
 
     with open(meta_data, 'r') as f:
         data = json.load(f)
@@ -54,7 +92,16 @@ if __name__ == "__main__":
 
     data_num = len(data)
 
-    gemini = EvalGemini(project_id, location, model=model_name)
+    if args.google_api_key:
+        GOOGLE_API_KEY = args.google_api_key
+    else:
+        GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
+
+    if GOOGLE_API_KEY is None:
+        raise ValueError("Please set the GOOGLE_API_KEY environment variable or pass it as an argument")
+
+    genai.configure(api_key=GOOGLE_API_KEY)
+    gemini = EvalGemini(model=model_name)
 
     for i in range(len(data)):
         id = f"v1_{i}"
