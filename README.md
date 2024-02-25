@@ -27,13 +27,13 @@ In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-
 Figure 1: Different from conventional VL benchmarks only require one or two capabilities, MM-Vet focuses on the integration of different core VL capabilities, including recognition, OCR, knowledge, language generation, spatial awareness, and math.
 
 ## Evalute your model on MM-Vet
-**Step 0**: Get access GPT-4/GPT-3.5 API. If you have not access, you can try MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) (but it may wait for long time depending on number of users).
+**Step 0**: Install openai package with `pip install openai>=1` and get access GPT-4/GPT-3.5 API. If you have not access, you can try MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) (but it may wait for long time depending on number of users).
 
 **Step 1**:  Download MM-Vet data [here](https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip) and unzip `unzip mm-vet.zip`.
 
 **Step 2**: Infer your model on MM-Vet and save your model outputs in json like [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json), or just use [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json) as example to evalute.
 
-**Step 3**: `git clone https://github.com/yuweihao/MM-Vet.git && cd MM-Vet`, run LLM-based evaluator in [mm-vet_evaluator.ipynb](mm-vet_evaluator.ipynb)
+**Step 3**: `git clone https://github.com/yuweihao/MM-Vet.git && cd MM-Vet`, run LLM-based evaluator in [mm-vet_evaluator.ipynb](mm-vet_evaluator.ipynb) or [mm-vet_evaluator.py](mm-vet_evaluator.py) (Thanks to @HireTheHero to arrange it into py version).
 
 
 ## GPT-4V Prediction Examples

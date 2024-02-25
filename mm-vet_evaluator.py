@@ -1,8 +1,8 @@
 # in case you want to run this script independently
 
 import argparse
-import openai
-from openai.error import RateLimitError
+from openai import OpenAI
+from openai._exceptions import RateLimitError
 import json
 import os
 from tqdm import tqdm
@@ -167,9 +167,6 @@ def runs(
     grade_file,
     data,
     len_data,
-    num_run,
-    gpt_model,
-    prompt,
     sub_set=None,
 ):
     with open(model_results_file) as f:
@@ -228,13 +225,13 @@ def runs(
 
                 while not grade_sample_run_complete:
                     try:
-                        response = openai.ChatCompletion.create(
+                        response = client.chat.completions.create(
                             model=args.gpt_model,
                             max_tokens=3,
                             temperature=temperature,
                             messages=messages,
                         )
-                        content = response["choices"][0]["message"]["content"]
+                        content = response.choices[0].message.content
                         flag = True
                         try_time = 1
                         while flag:
@@ -263,13 +260,13 @@ def runs(
                                 messages = [
                                     {"role": "user", "content": question},
                                 ]
-                                response = openai.ChatCompletion.create(
+                                response = client.chat.completions.create(
                                     model=args.gpt_model,
                                     max_tokens=3,
                                     temperature=temperature,
                                     messages=messages,
                                 )
-                                content = response["choices"][0]["message"]["content"]
+                                content = response.choices[0].message.content
                                 try_time += 1
                                 temperature += 0.5
                                 print(f"{id} try {try_time} times")
@@ -284,11 +281,11 @@ def runs(
                         time.sleep(30)
 
                 if len(sample_grade["model"]) >= j + 1:
-                    sample_grade["model"][j] = response["model"]
+                    sample_grade["model"][j] = response.model
                     sample_grade["content"][j] = content
                     sample_grade["score"][j] = score
                 else:
-                    sample_grade["model"].append(response["model"])
+                    sample_grade["model"].append(response.model)
                     sample_grade["content"].append(content)
                     sample_grade["score"].append(score)
                 grade_results[id] = sample_grade
@@ -360,6 +357,10 @@ if __name__ == "__main__":
         if "OPENAI_API_KEY" in os.environ
         else args.openai_api_key
     )
+    client = OpenAI(
+    # This is the default and can be omitted
+    api_key=os.environ.get("OPENAI_API_KEY"),
+    )
 
     metadata = load_metadata(args)
     (
@@ -387,9 +388,6 @@ if __name__ == "__main__":
         grade_file,
         data,
         len_data,
-        args.num_run,
-        args.gpt_model,
-        args.prompt,
         sub_set,
     )
     df, df2 = export_result(
