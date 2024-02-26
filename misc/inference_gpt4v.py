@@ -1,8 +1,14 @@
+"""
+Usage:
+python inference_gpt4v.py --mmvet_path /path/to/mm-vet --openai_api_key <api_key>
+"""
+
 import json
 import time
 import os
 import base64
 import requests
+import argparse
 
 
 # Function to encode the image
@@ -12,12 +18,12 @@ def encode_image(image_path):
 
 
 class EvalGPT4V:
-    def __init__(self, api_key, model="gpt-4-vision-preview", detail="auto",
-                 content="You are a helpful assistant. Generate a short and concise response to the following image text pair."):
+    def __init__(self, api_key, model="gpt-4-vision-preview", image_detail="auto",
+                 system_text="You are a helpful assistant. Generate a short and concise response to the following image text pair."):
         self.api_key = api_key
         self.model = model
-        self.detail = detail
-        self.content = content
+        self.image_detail = image_detail
+        self.system_text = system_text
         self.headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {self.api_key}"
@@ -27,19 +33,18 @@ class EvalGPT4V:
     def get_response(self, image_path, prompt="What's in this image?"):
         base64_image = encode_image(image_path)
         image_format = "data:image/png;base64" if 'png' in image_path else "data:image/jpeg;base64"
-        payload = {
-        "model": self.model,
-        "messages": [
-            {
+        messages = []
+        if self.system_text is not None or self.system_text != "":
+            messages.append({
                 "role": "system", 
                 "content": [
                 {
                     "type": "text",
-                    "text": self.content
+                    "text": self.system_text,
                 },
                 ]
-            },
-            {
+            })
+        messages.append({
             "role": "user",
             "content": [
                 {
@@ -50,15 +55,17 @@ class EvalGPT4V:
                 "type": "image_url",
                 "image_url": {
                     "url": f"{image_format},{base64_image}",
-                    "detail": self.detail,
+                    "detail": self.image_detail,
                 }
                 }
             ]
-            }
-        ],
+        })
+
+        payload = {
+        "model": self.model,
+        "messages": messages,
         "max_tokens": 300,
         }
-
 
         response_text, retry, response_json, regular_time = '', 0, None, 30
         while len(response_text) < 1:
@@ -82,19 +89,50 @@ class EvalGPT4V:
                 time.sleep(regular_time)
                 continue
             response_text = response_json["choices"][0]["message"]["content"]
-        return response_json["choices"][0]["message"]["content"]
+        return response_text
     
+
+def arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--mmvet_path",
+        type=str,
+        default="/path/to/mm-vet",
+        help="Download mm-vet.zip and `unzip mm-vet.zip` and change the path here",
+    )
+    parser.add_argument(
+        "--result_path",
+        type=str,
+        default="../results",
+    )
+    parser.add_argument(
+        "--openai_api_key", type=str, default=None,
+        help="refer to https://platform.openai.com/docs/quickstart?context=python"
+    )
+    parser.add_argument(
+        "--gpt_model",
+        type=str,
+        default="gpt-4-vision-preview",
+        help="GPT model name",
+    )
+    parser.add_argument(
+        "--image_detail",
+        type=str,
+        default="auto",
+        help="Refer to https://platform.openai.com/docs/guides/vision/low-or-high-fidelity-image-understanding",
+    )
+    args = parser.parse_args()
+    return args
 
 
 if __name__ == "__main__":
-    # OpenAI API Key
-    OPENAI_API_KEY = "YOUR_API_KEY"
-    model_name = "gpt-4-vision-preview"
-    detail = "high"
-    # change the path to your own path
-    results_path = f'../results/{model_name}_detail-{detail}.json' # path to save the results
-    image_folder = f"/path/to/mm-vet/images" 
-    meta_data = "/path/to/mm-vet/mm-vet.json" 
+    args = arg_parser()
+    model_name = args.gpt_model
+    if os.path.exists(args.result_path) is False:
+        os.makedirs(args.result_path)
+    results_path = os.path.join(args.result_path, f"{model_name}_detail-{args.image_detail}_test.json")
+    image_folder = os.path.join(args.mmvet_path, "images")
+    meta_data = os.path.join(args.mmvet_path, "mm-vet.json")
 
     with open(meta_data, 'r') as f:
         data = json.load(f)
@@ -107,7 +145,15 @@ if __name__ == "__main__":
 
     data_num = len(data)
 
-    gpt4v = EvalGPT4V(OPENAI_API_KEY, model=model_name, detail=detail)
+    if args.openai_api_key:
+        OPENAI_API_KEY = args.openai_api_key
+    else:
+        OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+    if OPENAI_API_KEY is None:
+        raise ValueError("Please set the OPENAI_API_KEY environment variable or pass it as an argument")
+
+    gpt4v = EvalGPT4V(OPENAI_API_KEY, model=model_name, image_detail=args.image_detail)
 
     for i in range(len(data)):
         id = f"v1_{i}"
