@@ -1,6 +1,6 @@
 """
 Usage:
-python inference_gpt4v.py --mmvet_path /path/to/mm-vet --openai_api_key <api_key>
+python gpt4v.py --mmvet_path /path/to/mm-vet --openai_api_key <api_key>
 """
 
 import json
@@ -103,7 +103,7 @@ def arg_parser():
     parser.add_argument(
         "--result_path",
         type=str,
-        default="../results",
+        default="results",
     )
     parser.add_argument(
         "--openai_api_key", type=str, default=None,

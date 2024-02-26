@@ -2,7 +2,7 @@
 Please refer to https://ai.google.dev/tutorials/python_quickstart to get the API key
 
 Install with `pip install -q -U google-generativeai`,
-Then `python inference_gemini_pro_vision.py --mmvet_path /path/to/mm-vet --google_api_key YOUR_API_KEY`
+Then `python gemini_vision.py --mmvet_path /path/to/mm-vet --google_api_key YOUR_API_KEY`
 """
 
 import os
@@ -56,7 +56,7 @@ def arg_parser():
     parser.add_argument(
         "--result_path",
         type=str,
-        default="../results",
+        default="results",
     )
     parser.add_argument(
         "--google_api_key", type=str, default=None,
