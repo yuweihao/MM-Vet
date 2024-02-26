@@ -31,10 +31,23 @@ Figure 1: Different from conventional VL benchmarks only require one or two capa
 
 **Step 1**:  Download MM-Vet data [here](https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip) and unzip `unzip mm-vet.zip`.
 
-**Step 2**: Infer your model on MM-Vet and save your model outputs in json like [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json), or just use [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json) as example to evalute.
+**Step 2**: Infer your model on MM-Vet and save your model outputs in json like [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json), or just use [llava_llama2_13b_chat.json](results/llava_llama2_13b_chat.json) as example to evalute. We also release inference scripts for GPT-4V and Gemini.
+
+```bash
+image_detail=high # or auto, low refer to https://platform.openai.com/docs/guides/vision/low-or-high-fidelity-image-understanding
+
+python inference/gpt4v.py --mmvet_path /path/to/mm-vet --image_detail ${image_detail}
+```
+
+```bash
+python inference/gemini_vision.py --mmvet_path /path/to/mm-vet
+```
 
 **Step 3**: `git clone https://github.com/yuweihao/MM-Vet.git && cd MM-Vet`, run LLM-based evaluator in [mm-vet_evaluator.ipynb](mm-vet_evaluator.ipynb) or [mm-vet_evaluator.py](mm-vet_evaluator.py) (Thanks to @HireTheHero to arrange it into py version).
-
+```bash
+python mm-vet_evaluator.py --mmvet_path /path/to/mm-vet --result_file results/llava_llama2_13b_chat.json
+```
+If you cannot access GPT-4 (gpt-4-0613), you can upload your model output results (json file) to MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) to get the grading results.
 
 ## GPT-4V Prediction Examples
 ![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925013-daf61a18-5472-4064-88a1-d1c741bed018.png)

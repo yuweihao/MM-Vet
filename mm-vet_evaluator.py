@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 from collections import Counter
 import time
+import pathlib
 
 prompt = """Compare the ground truth and prediction from AI models, to give a correctness score for the prediction. <AND> in the ground truth means it is totally right only when all elements in the ground truth are present in the prediction, and <OR> means it is totally right when any one element in the ground truth is present in the prediction. The correctness score is 0.0 (totally wrong), 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, or 1.0 (totally right). Just complete the last space of the correctness score.
 
@@ -28,19 +29,26 @@ Can you explain this meme? | This meme is poking fun at the fact that the names 
 def arg_parser(prompt=prompt):
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--openai_api_key", type=str, default="your-api-key", help="openai api key"
-    )
-    parser.add_argument(
         "--mmvet_path",
         type=str,
         default="/path/to/mm-vet",
         help="Download mm-vet.zip and `unzip mm-vet.zip` and change the path here",
     )
     parser.add_argument(
-        "--model",
+        "--result_file",
         type=str,
-        default="llava_llama2_13b_chat",
-        help="change your model name",
+        default="results/llava_llama2_13b_chat.json",
+        help="path to the model result file, must end with .json",
+    )
+    parser.add_argument(
+        "--result_path",
+        type=str,
+        default="results",
+        help="path to save the grading results",
+    )
+    parser.add_argument(
+        "--openai_api_key", type=str, default=None,
+        help="If not specified, use OPENAI_API_KEY environment variable."
     )
     parser.add_argument(
         "--gpt_model", type=str, default="gpt-4-0613", help="gpt model name"
@@ -60,11 +68,6 @@ def arg_parser(prompt=prompt):
         help="number of decimal places to round to",
     )
     parser.add_argument(
-        "--result_path",
-        type=str,
-        default="results",
-    )
-    parser.add_argument(
         "--num_run",
         type=int,
         default=1,
@@ -73,22 +76,19 @@ def arg_parser(prompt=prompt):
     args = parser.parse_args()
     return args
 
-
-def get_file_names(args, sub_set_name):
-    model_results_file = os.path.join(args.result_path, f"{args.model}.json")
-
+def get_file_names(args, model, sub_set_name):
     # grade results for each sample to svae
-    grade_file = f"{args.model}_{args.gpt_model}-grade-{args.num_run}runs.json"
+    grade_file = f"{model}_{args.gpt_model}-grade-{args.num_run}runs.json"
     grade_file = os.path.join(args.result_path, grade_file)
 
     # score results regarding capabilities/capability integration to save
     cap_score_file = (
-        f"{args.model}_{sub_set_name}{args.gpt_model}-cap-score-{args.num_run}runs.csv"
+        f"{model}_{sub_set_name}{args.gpt_model}-cap-score-{args.num_run}runs.csv"
     )
     cap_score_file = os.path.join(args.result_path, cap_score_file)
-    cap_int_score_file = f"{args.model}_{sub_set_name}{args.gpt_model}-cap-int-score-{args.num_run}runs.csv"
+    cap_int_score_file = f"{model}_{sub_set_name}{args.gpt_model}-cap-int-score-{args.num_run}runs.csv"
     cap_int_score_file = os.path.join(args.result_path, cap_int_score_file)
-    return model_results_file, grade_file, cap_score_file, cap_int_score_file
+    return grade_file, cap_score_file, cap_int_score_file
 
 
 def load_metadata(args):
@@ -163,13 +163,12 @@ def load_metadata(args):
 
 def runs(
     args,
-    model_results_file,
     grade_file,
     data,
     len_data,
     sub_set=None,
 ):
-    with open(model_results_file) as f:
+    with open(args.result_file) as f:
         results = json.load(f)
     if os.path.exists(grade_file):
         with open(grade_file, "r") as f:
@@ -296,7 +295,7 @@ def runs(
     return grade_results
 
 
-def export_result(args, df, df2, grade_results, data, cap_set_counter, cap_set_names):
+def export_result(args, model, df, df2, grade_results, data, cap_set_counter, cap_set_names):
     columns = df.columns
     columns2 = df2.columns
 
@@ -334,7 +333,7 @@ def export_result(args, df, df2, grade_results, data, cap_set_counter, cap_set_n
 
     cap_socres["std"] = std
     cap_socres["runs"] = runs
-    df.loc[args.model] = cap_socres
+    df.loc[model] = cap_socres
 
     for k, v in cap_socres2.items():
         cap_socres2[k] = round(
@@ -342,7 +341,7 @@ def export_result(args, df, df2, grade_results, data, cap_set_counter, cap_set_n
         )
     cap_socres2["std"] = std
     cap_socres2["runs"] = runs
-    df2.loc[args.model] = cap_socres2
+    df2.loc[model] = cap_socres2
 
     df.to_csv(cap_score_file)
     df2.to_csv(cap_int_score_file)
@@ -352,15 +351,19 @@ def export_result(args, df, df2, grade_results, data, cap_set_counter, cap_set_n
 
 if __name__ == "__main__":
     args = arg_parser()
-    openai.api_key = (
-        os.environ["OPENAI_API_KEY"]
-        if "OPENAI_API_KEY" in os.environ
-        else args.openai_api_key
-    )
+    if args.openai_api_key:
+        OPENAI_API_KEY = args.openai_api_key
+    else:
+        OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
     client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.environ.get("OPENAI_API_KEY"),
+        api_key=OPENAI_API_KEY
     )
+
+    if os.path.exists(args.result_file) is False:
+        raise ValueError("Result file does not exist")
+    if not args.result_file.endswith(('.json', '.JSON')):
+        raise ValueError("Result file should be a json file")
+    model = pathlib.Path(args.result_file).stem
 
     metadata = load_metadata(args)
     (
@@ -375,16 +378,14 @@ if __name__ == "__main__":
         df2,
         cap_set_names,
     ) = metadata
-    file_names = get_file_names(args, sub_set_name)
+    file_names = get_file_names(args, model, sub_set_name)
     (
-        model_results_file,
         grade_file,
         cap_score_file,
         cap_int_score_file,
     ) = file_names
     grade_results = runs(
         args,
-        model_results_file,
         grade_file,
         data,
         len_data,
@@ -392,6 +393,7 @@ if __name__ == "__main__":
     )
     df, df2 = export_result(
         args,
+        model,
         df,
         df2,
         grade_results,
@@ -400,4 +402,7 @@ if __name__ == "__main__":
         cap_set_names,
     )
     print(df)
+    print("\n")
     print(df2)
+    print("\n")
+    print(f"Grading results are saved in:\n{grade_file}\n{cap_score_file}\n{cap_int_score_file}")
