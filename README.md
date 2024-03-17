@@ -13,6 +13,7 @@
 </p>
 2023/12/23: :fire: :fire: We release inferences scripts for Qwen-VL and Claude. Qwen-VL-Max and Claude 3 Opus achieve 66.6% and 58.1%, respectively.
 
+
 2023/12/23: :fire: :fire: We release inferences scripts for GPT-4V and Gemini. Gemini Pro Vision achieves 64.3% score.
 
 
