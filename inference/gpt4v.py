@@ -3,21 +3,14 @@ Usage:
 python gpt4v.py --mmvet_path /path/to/mm-vet --openai_api_key <api_key>
 """
 
-import json
 import time
 import os
-import base64
 import requests
 import argparse
+from utils import evaluate_on_mmvet, encode_image
 
 
-# Function to encode the image
-def encode_image(image_path):
-    with open(image_path, "rb") as image_file:
-        return base64.b64encode(image_file.read()).decode('utf-8')
-
-
-class EvalGPT4V:
+class GPT4V:
     def __init__(self, api_key, model="gpt-4-vision-preview", image_detail="auto",
                  system_text="You are a helpful assistant. Generate a short and concise response to the following image text pair."):
         self.api_key = api_key
@@ -89,7 +82,7 @@ class EvalGPT4V:
                 time.sleep(regular_time)
                 continue
             response_text = response_json["choices"][0]["message"]["content"]
-        return response_text
+        return response_text.strip()
     
 
 def arg_parser():
@@ -110,7 +103,7 @@ def arg_parser():
         help="refer to https://platform.openai.com/docs/quickstart?context=python"
     )
     parser.add_argument(
-        "--gpt_model",
+        "--model_name",
         type=str,
         default="gpt-4-vision-preview",
         help="GPT model name",
@@ -127,24 +120,8 @@ def arg_parser():
 
 if __name__ == "__main__":
     args = arg_parser()
-    model_name = args.gpt_model
-    if os.path.exists(args.result_path) is False:
-        os.makedirs(args.result_path)
-    results_path = os.path.join(args.result_path, f"{model_name}_detail-{args.image_detail}_test.json")
-    image_folder = os.path.join(args.mmvet_path, "images")
-    meta_data = os.path.join(args.mmvet_path, "mm-vet.json")
 
-    with open(meta_data, 'r') as f:
-        data = json.load(f)
-
-    if os.path.exists(results_path):
-        with open(results_path, 'r') as f:
-            results = json.load(f)
-    else:
-        results = {}
-
-    data_num = len(data)
-
+    # prepare the model
     if args.openai_api_key:
         OPENAI_API_KEY = args.openai_api_key
     else:
@@ -153,21 +130,7 @@ if __name__ == "__main__":
     if OPENAI_API_KEY is None:
         raise ValueError("Please set the OPENAI_API_KEY environment variable or pass it as an argument")
 
-    gpt4v = EvalGPT4V(OPENAI_API_KEY, model=model_name, image_detail=args.image_detail)
+    model = GPT4V(OPENAI_API_KEY, model=args.model_name, image_detail=args.image_detail)
 
-    for i in range(len(data)):
-        id = f"v1_{i}"
-        if id in results:
-            continue
-        imagename = data[id]['imagename']
-        img_path = os.path.join(image_folder, imagename)
-        prompt = data[id]['question']
-        prompt = prompt.strip()
-        print("\n", id)
-        print(f"Image: {imagename}")
-        print(f"Prompt: {prompt}")
-        response = gpt4v.get_response(img_path, prompt)                
-        print(f"Response: {response}")
-        results[id] = response        
-        with open(results_path, 'w') as f:
-            json.dump(results, f, indent=4)
+    # evaluate on mm-vet
+    evaluate_on_mmvet(args, model)
