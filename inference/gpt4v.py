@@ -131,6 +131,7 @@ if __name__ == "__main__":
         raise ValueError("Please set the OPENAI_API_KEY environment variable or pass it as an argument")
 
     model = GPT4V(OPENAI_API_KEY, model=args.model_name, image_detail=args.image_detail)
+    args.model_name = f"{args.model_name}_detail-{args.image_detail}"
 
     # evaluate on mm-vet
     evaluate_on_mmvet(args, model)
