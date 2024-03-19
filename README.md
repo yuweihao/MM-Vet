@@ -11,7 +11,7 @@
 [<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet"><b>Leaderboard</b></a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
 </p>
-2023/12/23: :fire: :fire: We release inferences scripts for Qwen-VL and Claude. Qwen-VL-Max and Claude 3 Opus achieve 66.6% and 58.1%, respectively.
+2024/03/17: :fire: :fire: We release inferences scripts for Qwen-VL and Claude. Qwen-VL-Max and Claude 3 Opus achieve 66.6% and 58.1%, respectively.
 
 
 2023/12/23: :fire: :fire: We release inferences scripts for GPT-4V and Gemini. Gemini Pro Vision achieves 64.3% score.
