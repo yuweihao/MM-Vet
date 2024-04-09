@@ -61,7 +61,7 @@ def arg_parser():
     )
     parser.add_argument(
         "--dashscope_api_key", type=str, default=None,
-        help="refer to https://docs.anthropic.com/claude/reference/getting-started-with-the-api"
+        help="refer to https://help.aliyun.com/zh/dashscope/developer-reference/vl-plus-quick-start"
     )
     parser.add_argument(
         "--model_name",
