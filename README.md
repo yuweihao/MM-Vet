@@ -7,9 +7,9 @@
 
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.02490">Paper</a>] 
-[<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download dataset</a>]
+[<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download Dataset</a>]
 [<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet"><b>Leaderboard</b></a>]
-[<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Hugging Face Space</a>]
+[<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Online Evaluator</a>]
 </p>
 2024/03/17: :fire: :fire: We release inferences scripts for Qwen-VL and Claude. Qwen-VL-Max and Claude 3 Opus achieve 66.6% and 58.1%, respectively.
 
