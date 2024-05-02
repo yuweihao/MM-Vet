@@ -54,7 +54,7 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 
 ## Citation
 ```
-@inproceedings{yu2023mm,
+@inproceedings{yu2024mm,
   title={Mm-vet: Evaluating large multimodal models for integrated capabilities},
   author={Yu, Weihao and Yang, Zhengyuan and Li, Linjie and Wang, Jianfeng and Lin, Kevin and Liu, Zicheng and Wang, Xinchao and Wang, Lijuan},
   booktitle={International conference on machine learning},
