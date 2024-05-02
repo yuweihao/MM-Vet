@@ -3,7 +3,7 @@
 </p>
 
 
-# [MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490)
+# [MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490) (ICML 2024)
 
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.02490">Paper</a>] 
@@ -50,6 +50,18 @@ python inference/gemini_vision.py --mmvet_path /path/to/mm-vet
 python mm-vet_evaluator.py --mmvet_path /path/to/mm-vet --result_file results/llava_llama2_13b_chat.json
 ```
 If you cannot access GPT-4 (gpt-4-0613), you can upload your model output results (json file) to MM-Vet online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet_Evaluator) to get the grading results.
+
+
+## Citation
+```
+@inproceedings{yu2023mm,
+  title={Mm-vet: Evaluating large multimodal models for integrated capabilities},
+  author={Yu, Weihao and Yang, Zhengyuan and Li, Linjie and Wang, Jianfeng and Lin, Kevin and Liu, Zicheng and Wang, Xinchao and Wang, Lijuan},
+  booktitle={International conference on machine learning},
+  year={2024},
+  organization={PMLR}
+}
+```
 
 ## GPT-4V Prediction Examples
 ![GPT-4V prediction examples](https://github-production-user-asset-6210df.s3.amazonaws.com/15921929/277925013-daf61a18-5472-4064-88a1-d1c741bed018.png)
