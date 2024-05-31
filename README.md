@@ -76,7 +76,7 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 Please refer to these two files: [inference_bard.sh](misc/inference_bard.sh) and [inference_bard.py](misc/inference_bard.py).
 
 
-## More samples on MM-Vet
+## Some samples on MM-Vet
 ![MM-Vet example 1](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258215482-61d2e5d8-51c9-45ed-b35b-8e6c64bb26d8.jpg)
 
 **Q**: What occasions would someone use this meme?
@@ -261,3 +261,6 @@ Of the three newer networks, the Washington DC underground is the most extensive
 **GT**: 14
 
 **Required capabilities**: Recognition, OCR, spatial awareness, math
+
+
+More samples are shown [here](README_more_samples.md).
