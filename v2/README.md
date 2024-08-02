@@ -44,6 +44,9 @@ python mm-vet-v2_evaluator.py --mmvetv2_path /path/to/mm-vet-v2 --result_file re
 ```
 If you cannot access GPT-4 (gpt-4-0613), you can upload your model output results (json file) to MM-Vet v2 online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet-v2_Evaluator) to get the grading results.
 
+## Some results
+![MM-Vet v2 results](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/MM-Vet-v2_results.png)
+
 
 ## Citation
 ```
