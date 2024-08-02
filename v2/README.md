@@ -3,10 +3,10 @@
 </p>
 
 
-# [MM-Vet v2: A Challenging Benchmark to Evaluate Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/xxxx.xxxxx)
+# [MM-Vet v2: A Challenging Benchmark to Evaluate Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2408.00765)
 
 <p align="center">
-[<a href="https://arxiv.org/abs/xxxx.xxxxx">Paper</a>] 
+[<a href="https://arxiv.org/abs/2408.00765">Paper</a>] 
 [<a href="https://github.com/yuweihao/MM-Vet/releases/download/v2/mm-vet-v2.zip">Download Dataset</a>]
 [<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet-v2"><b>Leaderboard</b></a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet-v2_Evaluator">Online Evaluator</a>]
@@ -50,7 +50,7 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 @article{yu2024mmvetv2,
   title={MM-Vet v2: A Challenging Benchmark to Evaluate Large Multimodal Models for Integrated Capabilities},
   author={Weihao Yu and Zhengyuan Yang and Lingfeng Ren and Linjie Li and Jianfeng Wang and Kevin Lin and Chung-Ching Lin and Zicheng Liu and Lijuan Wang and Xinchao Wang},
-  journal={arXiv preprint arXiv:xxxx.xxxxx},
+  journal={arXiv preprint arXiv:2408.00765},
   year={2024}
 }
 ```

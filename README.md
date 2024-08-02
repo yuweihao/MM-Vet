@@ -11,6 +11,9 @@
 [<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet"><b>Leaderboard</b></a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Online Evaluator</a>]
 </p>
+2024/08/02: :fire: :fire: We release [MM-Vet v2](v2/), the extension of MM-Vet, which includes a new vision-langauge capability called "image-text sequence understanding", and expands the evaluation set size while maintaining the high quality.
+
+
 2024/03/17: :fire: :fire: We release inferences scripts for Qwen-VL and Claude. Qwen-VL-Max and Claude 3 Opus achieve 66.6% and 58.1%, respectively.
 
 
