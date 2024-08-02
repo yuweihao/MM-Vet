@@ -48,6 +48,87 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 ![MM-Vet v2 results](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/MM-Vet-v2_results.png)
 
 
+## Some interesting samples
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_495_0.jpg)
+
+**Q**: How many feet do these animals have in total?
+
+**GT**: 16
+
+**Required capabilities**: Recognition, knowledge, math
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_500_0.jpg)
+
+**Q**: How many feet do these animals have in total?
+
+**GT**: 10
+
+**Required capabilities**: Recognition, knowledge, math
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_504_0.jpg)
+
+**Q**: Is it possible for the car to move with magnetic force according to the Physical laws?
+
+**GT**: yes
+
+**Required capabilities**: Recognition, OCR, spatial awareness, knowledge
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_505_0.jpg)
+
+**Q**: Which track should the trolley go on, A or B?
+
+**GT**: A
+
+**Required capabilities**: Recognition, spatial awareness
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_507_0.jpg)
+
+**Q**: Can we make sure the cat is alive before we open the box?
+
+**GT**: yes
+
+**Required capabilities**: Recognition, spatial awareness, knowledge
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_508_0.jpg)
+
+**Q**: From location A to location B, is it faster to go east or west?
+
+**GT**: east
+
+**Required capabilities**: Recognition, spatial awareness, knowledge
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_512_0.jpg)
+
+**Q**: Neglecting air buoyancy (vacuum), which side will go down, iron or cotton?
+
+**GT**: iron
+
+**Required capabilities**: Recognition, OCR, spatial awareness, knowledge
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_514_0.jpg)
+
+**Q**: How many dwarfs are there near Snow White in the image?
+
+**GT**: 6
+
+**Required capabilities**: Recognition, spatial awareness
+
+
 ## Citation
 ```
 @article{yu2024mmvetv2,
