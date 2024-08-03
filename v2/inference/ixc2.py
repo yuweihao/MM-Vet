@@ -6,7 +6,7 @@ import os
 import torch
 import torchvision
 from PIL import Image
-from utils import evaluate_on_mmvetv2
+from utils import evaluate_on_mmvetv2, process_images_for_question
 
 
 def auto_configure_device_map(num_gpus):
@@ -39,7 +39,54 @@ def auto_configure_device_map(num_gpus):
     return device_map
 
 
-def model_gen(model, text, images, need_bos=True, padding=False):
+def model_gen_single_img(model, text, images, need_bos=True, padding=False):
+    pt1 = 0
+    embeds = []
+    im_mask = []
+    images = images
+    images_loc = [0]
+    for i, pts in enumerate(images_loc + [len(text)]):
+        subtext = text[pt1:pts]
+        if need_bos or len(subtext) > 0:
+            text_embeds = model.encode_text(subtext, add_special_tokens=need_bos)
+            embeds.append(text_embeds)
+            im_mask.append(torch.zeros(text_embeds.shape[:2]).cuda())
+            need_bos = False
+        if i < len(images):
+            try:
+                image = Image.open(images[i]).convert("RGB")
+            except:
+                image = images[i].convert("RGB")
+            if padding:
+                image = __padding__(image)
+            image = model.vis_processor(image).unsqueeze(0).half().cuda()
+            image_embeds = model.encode_img(image)
+            embeds.append(image_embeds)
+            im_mask.append(torch.ones(image_embeds.shape[:2]).cuda())
+        pt1 = pts
+    embeds = torch.cat(embeds, dim=1)
+    im_mask = torch.cat(im_mask, dim=1)
+    im_mask = im_mask.bool()
+
+    outputs = model.generate(
+        inputs_embeds=embeds,
+        im_mask=im_mask,
+        temperature=1.0,
+        max_new_tokens=4096,
+        num_beams=3,
+        do_sample=False,
+        repetition_penalty=1.0,
+    )
+
+    output_token = outputs[0]
+    if output_token[0] == 0 or output_token[0] == 1:
+        output_token = output_token[1:]
+    output_text = model.tokenizer.decode(output_token, add_special_tokens=False)
+    output_text = output_text.split("[UNUSED_TOKEN_145]")[0].strip()
+    return output_text
+
+
+def model_gen_multi_img(model, text, images, need_bos=True, padding=False):
     embeds = []
     im_mask = []
     images = images
@@ -120,12 +167,11 @@ class InternLM_XComposer2_VL:
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_name, trust_remote_code=True
         )
-        # model = AutoModelForCausalLM.from_pretrained(ckpt_path, device_map="cuda", trust_remote_code=True).eval().cuda().half()
         self.model.tokenizer = self.tokenizer
         self.system_message = system_message
         self.chat_format = chat_format
 
-    def get_response(self, image_folder, id, prompt="What's in this image?") -> str:
+    def get_response(self, image_folder, prompt="What's in this image?") -> str:
         images = []
         text_queries = []
         queries = prompt.split("<IMG>")
@@ -136,24 +182,33 @@ class InternLM_XComposer2_VL:
                 text_queries.append("<IMAGE>")
             else:
                 text_queries.append(query)
-        # text_query = "".join(text_queries)
-        # text = "[UNUSED_TOKEN_146]system\n{}[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]user\n{}Answer this question in detail.[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]assistant\n".format(
-        #     self.system_message, text_query
-        # )
-        text_query = (
-            [
-                "[UNUSED_TOKEN_146]system\n{}[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]user\n".format(
-                    self.system_message
+        if args.combine_imgs:
+            text_query = "".join(text_queries)
+            text = "[UNUSED_TOKEN_146]system\n{}[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]user\n{}Answer this question in detail.[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]assistant\n".format(
+                self.system_message, text_query
+            )
+            image = [process_images_for_question(images)]
+            response = model_gen_single_img(
+                model=self.model,
+                text=text,
+                images=image,
+            )
+        else:
+            text_query = (
+                [
+                    "[UNUSED_TOKEN_146]system\n{}[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]user\n".format(
+                        self.system_message
+                    )
+                ]
+                + text_queries
+                + [
+                    "{}Answer this question in detail.[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]assistant\n"
+                ]
+            )
+            with torch.cuda.amp.autocast():
+                response = model_gen_multi_img(
+                    model=self.model, text=text_query, images=images
                 )
-            ]
-            + text_queries
-            + [
-                "{}Answer this question in detail.[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]assistant\n"
-            ]
-        )
-
-        with torch.cuda.amp.autocast():
-            response = model_gen(model=self.model, text=text_query, images=images)
         return response
 
 
@@ -183,6 +238,11 @@ def arg_parser():
     )
     parser.add_argument(
         "--chat_format",
+        action="store_true",
+        help="whether to use chat format",
+    )
+    parser.add_argument(
+        "--combine_imgs",
         action="store_true",
         help="whether to use chat format",
     )
