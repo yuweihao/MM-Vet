@@ -56,7 +56,7 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 
 **GT**: A
 
-**Required capabilities**: Recognition, orc, spatial awareness, knowledge
+**Required capabilities**: Recognition, OCR, spatial awareness, knowledge
 
 ---
 
