@@ -30,17 +30,13 @@ class Internvl:
             self.torch_type = torch.bfloat16
         else:
             self.torch_type = torch.float16
-        self.model = (
-            AutoModel.from_pretrained(
-                model_name,
-                torch_dtype=self.torch_type,
-                low_cpu_mem_usage=True,
-                trust_remote_code=True,
-                device_map="auto",
-            )
-            .eval()
-            .cuda()
-        )
+        self.model = AutoModel.from_pretrained(
+            model_name,
+            torch_dtype=self.torch_type,
+            low_cpu_mem_usage=True,
+            trust_remote_code=True,
+            device_map="auto",
+        ).eval()
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
         self.temperature = 0.0
