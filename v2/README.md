@@ -50,13 +50,13 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 
 ## Some interesting samples
 
-![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_495_0.jpg)
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_511_0.jpg)
 
-**Q**: How many feet do these animals have in total?
+**Q**: As shown in the image, two iron balls are hanging on the Leaning Tower of Pisa, ball A weighs 20kg, and ball B weighs 5kg. If the ropes hanging them are cut at the same time and air resistance is ignored, which iron ball will land first?
 
-**GT**: 16
+**GT**: A
 
-**Required capabilities**: Recognition, knowledge, math
+**Required capabilities**: Recognition, orc, spatial awareness, knowledge
 
 ---
 
@@ -65,6 +65,16 @@ If you cannot access GPT-4 (gpt-4-0613), you can upload your model output result
 **Q**: How many feet do these animals have in total?
 
 **GT**: 10
+
+**Required capabilities**: Recognition, knowledge, math
+
+---
+
+![MM-Vet v2 sample](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/v2_495_0.jpg)
+
+**Q**: How many feet do these animals have in total?
+
+**GT**: 16
 
 **Required capabilities**: Recognition, knowledge, math
 
