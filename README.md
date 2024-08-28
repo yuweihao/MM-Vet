@@ -9,6 +9,7 @@
 <p align="center">
 [<a href="https://arxiv.org/abs/2308.02490">Paper</a>] 
 [<a href="https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip">Download Dataset</a>]
+[<a href="https://huggingface.co/datasets/whyu/mm-vet">Dataset on Hugging Face</a>]
 [<a href="https://paperswithcode.com/sota/visual-question-answering-on-mm-vet"><b>Leaderboard</b></a>]
 [<a href="https://huggingface.co/spaces/whyu/MM-Vet_Evaluator">Online Evaluator</a>]
 </p>
