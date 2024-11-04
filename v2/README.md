@@ -18,6 +18,8 @@
 ![MM-Vet v2 examples](https://raw.githubusercontent.com/yuweihao/misc/master/MM-Vet/mm-vet-v2_examples.jpg)
 Figure 1: Four examples from MM-Vet v2. Compared with MM-Vet, MM-Vet v2 introduces more high-quality evaluation samples (e.g., (a) and (b)), and the ones with the new capability of image-text sequence understanding (e.g., (c) and (d)).
 
+The code is under the Apache 2.0 license, and the dataset is under the CC BY-NC 4.0 license.
+
 ## Evalute your model on MM-Vet v2
 **Step 0**: Install openai package with `pip install openai>=1` and get access GPT-4 API. If you have not access, you can try MM-Vet v2 online evaluator [Hugging Face Space](https://huggingface.co/spaces/whyu/MM-Vet-v2_Evaluator) (but it may wait for long time depending on number of users).
 
