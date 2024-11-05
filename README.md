@@ -29,7 +29,7 @@
 
 2023/10/07 :fire: :fire: **We released [MM-Vet leaderboard](https://paperswithcode.com/sota/visual-question-answering-on-mm-vet) on paperswithcode.com where you can add your model results conveniently.** Note that date here means model date instead of paper date because some improved model versions are released after the paper.
 
-In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490)".
+In this repo, we offer data and evaluator of MM-Vet, proposed by our paper "[MM-Vet: Evaluating Large Multimodal Models for Integrated Capabilities](https://arxiv.org/abs/2308.02490)". The code is under the Apache 2.0 license, and the dataset is under the CC BY-NC 4.0 license.
 
 
 ![MM-Vet](https://github-production-user-asset-6210df.s3.amazonaws.com/49296856/258206593-c61d21c8-cd9b-440c-9592-958d530bf122.png)
