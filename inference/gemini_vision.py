@@ -35,13 +35,14 @@ class Gemini:
                     ]
                 )
                 try:
-                    text = response.text
+                    text = response._result.candidates[0].content.parts[0].text
                 except:
                     text = " "
             except Exception as error:
                 print(error)
-                print('Sleeping for 10 seconds')
-                time.sleep(10)
+                sleep_time = 30
+                print(f'Sleeping for {sleep_time} seconds')
+                time.sleep(sleep_time)
         return text.strip()
 
 
